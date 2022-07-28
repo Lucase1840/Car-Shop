@@ -152,27 +152,51 @@ export default function Menu() {
                         {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                <Divider sx={{
+                    marginLeft: "32px",
+                    marginRight: "20px",
+                }} />
+                <List disablePadding={true}>
+                    {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
+                <Divider sx={{
+                    marginLeft: "32px",
+                    marginRight: "20px",
+                }} />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider sx={{
+                    marginLeft: "32px",
+                    marginRight: "20px",
+                }} />
+                <List>
+                    {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <List sx={{
+                    backgroundColor: "#EFEEEF",
+                }}>
+                    {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
                                 <ListItemText primary={text} />
                             </ListItemButton>
                         </ListItem>
