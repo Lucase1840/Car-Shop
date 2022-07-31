@@ -26,8 +26,7 @@ export function getCarDetails(carId) {
   return function (dispatch) {
     return axios(`${URL}/${carId}`)
       .then(resp => {
-        console.log(resp.data)
-        dispatch({ type: GET_ALL_CARS, payload: resp.data })
+        dispatch({ type: GET_CAR_DETAILS, payload: resp.data })
       })
       .catch(error => console.log(error.message))
   }
