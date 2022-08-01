@@ -88,7 +88,7 @@ export default function Menu() {
     // }, [])
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', width: { xs: "40%", xl: "85%" }, padding: 0, margin: 0 }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -107,77 +107,80 @@ export default function Menu() {
                 </Toolbar>
             </AppBar>
             <Main open={open}>
+                <Drawer
+                    sx={{
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        zIndex: 1200,
+                        '& .MuiDrawer-paper': {
+                            width: drawerWidth,
+                        },
+                    }}
+                    variant="persistent"
+                    anchor="right"
+                    open={open}
+                >
+                    <DrawerHeader sx={{
+                        width: { xs: "40%" }
+                    }}>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List disablePadding={true}>
+                        {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List>
+                        {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List>
+                        {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <List sx={{
+                        backgroundColor: "#EFEEEF",
+                    }}>
+                        {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
                 {/* <DrawerHeader /> */}
                 <CarCards />
             </Main>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                    },
-                }}
-                variant="persistent"
-                anchor="right"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List disablePadding={true}>
-                    {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List>
-                    {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List>
-                    {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <List sx={{
-                    backgroundColor: "#EFEEEF",
-                }}>
-                    {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
         </Box>
     );
 }

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, ImageListItem, Button } from '@mui/material';
+import { Box, Grid, Typography, ImageListItem, Button, Paper } from '@mui/material';
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom';
@@ -20,19 +20,32 @@ export default function CarDetails() {
 
     console.log(carDetails)
     return (
-        <Box >
-            <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }} columns={{ xs: 1, sm: 2, md: 2, xl: 2 }} sx={{
+        <>
+            <Grid container spacing={{ xs: 1, sm: 1, md: 3, xl: 4 }} columns={{ xs: 1, sm: 1, md: 2, xl: 2 }} sx={{
                 display: 'flex',
-                backgroundColor: "#F2F2F2;",
+                backgroundColor: "white",
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "end",
             }} >
-                <Box sx={{
-                    height: "420px",
-                }}>
-                    <img src={carDetails.photo} alt={carDetails.name} />
-                </Box>
+                <Box
+                    component="img"
+                    sx={{
+                        mt: "20px",
+                        backgroundColor: "white",
+                        display: 'block',
+                        overflow: 'hidden',
+                        width: '100%',
+                        maxWidth: { xs: 600, md: 800 },
+                        borderRadius: 3,
+                    }}
+                    src={carDetails.photo}
+                    alt={carDetails.name}
+                />
+                {/* <img src={carDetails.photo} alt={carDetails.name} sx={{
+                        width: "100%"
+                    }} />
+                </Paper> */}
                 <Grid item xs={1}>
                     <Box sx={{
                         display: 'flex',
@@ -52,19 +65,20 @@ export default function CarDetails() {
                 <Carousel carouselData={carDetails.model_features} />
             </Box>
             {carDetails ? carDetails.model_highlights?.map((highlight, i) => {
-                let direction = i % 2 === 0 ? "row" : "row-reverse"
+                let direction = i % 2 === 0 ? { xl: "row", xs: "column" } : { xl: "row-reverse", xs: "column" }
                 return (
                     < Box sx={{
-                        padding: 3,
                         display: 'flex',
                         flexDirection: direction,
                         justifyContent: 'space-evenly',
                         alignItems: 'center',
-                        backgroundColor: "#F2F2F2;",
+                        backgroundColor: "white;",
+                        width: "100%",
                     }}>
                         <Box sx={{
-                            width: "400px",
+                            width: "100%",
                             align: "center",
+                            padding: 1,
                         }}>
                             <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: "20px" }}>{highlight.title}</Typography>
                             <p dangerouslySetInnerHTML={{ __html: highlight.content }}></p>
@@ -84,6 +98,6 @@ export default function CarDetails() {
                     </Box>
                 )
             }) : ''}
-        </Box >
+        </>
     )
 }

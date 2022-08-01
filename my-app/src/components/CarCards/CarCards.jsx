@@ -56,7 +56,7 @@ function CarCards() {
                     <Grid item xs={1} key={car.id} className={classes.root} >
                         <Box sx={{
                             backgroundColor: '#efefee',
-                            width: "280px",
+                            width: { xs: "360px", xl: "280px" },
                             height: "260px",
                             marginTop: "60px",
                             mx: "auto",
@@ -80,7 +80,8 @@ function CarCards() {
                                 flexDirection: "column",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                width: "280px",
+                                width: { xs: "350px", xl: "280px" },
+                                mt: { xs: "15px" },
                                 height: "132px"
                             }}>
                                 <ImageListItem   >

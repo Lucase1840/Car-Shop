@@ -30,7 +30,7 @@ function Carousel({ carouselData }) {
     };
 
     return (
-        <Box sx={{ maxWidth: "100%", flexGrow: 1 }}>
+        <Box sx={{ maxWidth: "100%" }}>
             {/* <Paper
                 square
                 elevation={0}
@@ -51,47 +51,49 @@ function Carousel({ carouselData }) {
                 enableMouseEvents
             >
 
-                <div >
-                    {/* {Math.abs(activeStep - index) <= 2 ? ( */}
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: "row",
-                    }}>
-
-                        {carouselData ? carouselData.map(detail => {
-                            return (
+                {carouselData ? carouselData.map((detail, i) => {
+                    return (<div key={i}>
+                        {Math.abs(activeStep - i) <= 2 ? (
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: "row",
+                                height: 410,
+                                alignItems: "center",
+                                justifyContent: "space-around",
+                            }}>
                                 <Box sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    justifyContent: "space-arround",
-                                    alignItems: "center",
+                                    justifyContent: "space-around",
+                                    alignItems: "left",
                                     maxWidth: 270,
-                                    height: 255,
-                                    padding: 2
+                                    height: "265px",
+                                    padding: 2,
                                 }}>
                                     <Box
                                         component="img"
                                         sx={{
                                             display: 'block',
-                                            overflow: 'hidden',
+                                            // overflow: 'hidden',
                                             width: '100%',
+                                            height: "380px"
                                         }}
                                         src={detail.image}
                                         alt={detail.name}
                                     />
                                     <Typography sx={{
                                         fontWeight: "bold",
-                                        fontSize: "1.5vw"
+                                        fontSize: { sx: "2vw", xl: "1vw" },
+                                        mt: 1
                                     }}>{detail.description}</Typography>
-                                    <Typography>{detail.name}</Typography>
+                                    <Typography sx={{
+                                        mt: 1
+                                    }}>{detail.name}</Typography>
                                 </Box>
-                            )
-                        })
-                            : ''}
-                    </Box>
-                    {/* ) : null} */}
-
-                </div>
+                            </Box>
+                        ) : null}
+                    </div>)
+                }) : ''}
 
             </AutoPlaySwipeableViews>
             <MobileStepper
