@@ -27,6 +27,7 @@ export default function CarDetails() {
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "end",
+                width: '100vw',
             }} >
                 <Box
                     component="img"
@@ -35,69 +36,87 @@ export default function CarDetails() {
                         backgroundColor: "white",
                         display: 'block',
                         overflow: 'hidden',
-                        width: '100%',
-                        maxWidth: { xs: 600, md: 800 },
+                        width: '100vw',
+                        maxWidth: { xs: "100%", xl: 800 },
                         borderRadius: 3,
+                        p: 1
                     }}
                     src={carDetails.photo}
                     alt={carDetails.name}
                 />
-                {/* <img src={carDetails.photo} alt={carDetails.name} sx={{
-                        width: "100%"
-                    }} />
-                </Paper> */}
                 <Grid item xs={1}>
                     <Box sx={{
                         display: 'flex',
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "left",
-                        width: "60%",
-                        ml: "50px",
+                        ml: { xs: "15px", xl: "65px" },
                     }}>
-                        <Typography variant="h6" sx={{ fontWeight: "bold" }}>{carDetails.name}</Typography>
-                        <Typography variant="h4" sx={{ fontWeight: "bold" }}>{carDetails.title}</Typography>
-                        <p dangerouslySetInnerHTML={{ __html: carDetails.description }}></p>
+                        <Typography variant="h5" sx={{ fontWeight: "bold", fontSize: { xl: "2rem" } }}>{carDetails.name}</Typography>
+                        <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: { xl: "4rem" }, width: { xl: "70%" } }}>{carDetails.title}</Typography>
+                        <Typography dangerouslySetInnerHTML={{ __html: carDetails.description }} sx={{ fontSize: { xs: "5vw", xl: "1.5rem" }, width: { xl: "70%" } }}></Typography>
                     </Box>
                 </Grid>
-            </Grid>
-            <Box>
-                <Carousel carouselData={carDetails.model_features} />
-            </Box>
-            {carDetails ? carDetails.model_highlights?.map((highlight, i) => {
-                let direction = i % 2 === 0 ? { xl: "row", xs: "column" } : { xl: "row-reverse", xs: "column" }
-                return (
-                    < Box sx={{
-                        display: 'flex',
-                        flexDirection: direction,
-                        justifyContent: 'space-evenly',
-                        alignItems: 'center',
-                        backgroundColor: "white;",
-                        width: "100%",
-                    }}>
+
+                <Box
+                    sx={{
+                        width: '100vw',
+                        maxWidth: { xs: "100%", xl: "100%" },
+                    }}
+                >
+                    <Carousel carouselData={carDetails.model_features} />
+                </Box>
+
+                {carDetails ? carDetails.model_highlights?.map((highlight, i) => {
+                    let direction = i % 2 === 0 ? { xl: "row", xs: "column" } : { xl: "row-reverse", xs: "column" }
+                    return (
                         <Box sx={{
-                            width: "100%",
-                            align: "center",
-                            padding: 1,
+                            display: 'flex',
+                            flexDirection: direction,
+                            justifyContent: 'space-evenly',
+                            alignItems: 'center',
+                            backgroundColor: "white;",
+                            width: { xs: "100%", xl: "70%" },
+                            p: { xs: 2, xl: 6 },
+                            mt: { xl: "20px" }
                         }}>
-                            <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: "20px" }}>{highlight.title}</Typography>
-                            <p dangerouslySetInnerHTML={{ __html: highlight.content }}></p>
+                            <Box sx={{
+                                width: { xs: "100%", xl: "30%" },
+                                align: "center",
+                                padding: 1,
+                            }}>
+                                <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: "20px", mt: "10px" }}>{highlight.title}</Typography>
+                                <Typography dangerouslySetInnerHTML={{ __html: highlight.content }} sx={{ fontSize: { xs: "16px" } }}></Typography>
+                            </Box>
+                            <Box
+                                component="img"
+                                sx={{
+                                    display: 'block',
+                                    overflow: 'hidden',
+                                    width: '100%',
+                                    maxWidth: "600px",
+                                    borderRadius: 3,
+                                }}
+                                src={highlight.image}
+                                alt={highlight.name}
+                            />
                         </Box>
-                        <Box
-                            component="img"
-                            sx={{
-                                display: 'block',
-                                overflow: 'hidden',
-                                width: '100%',
-                                maxWidth: "600px",
-                                borderRadius: 3,
-                            }}
-                            src={highlight.image}
-                            alt={highlight.name}
-                        />
-                    </Box>
-                )
-            }) : ''}
+                    )
+                }) : ''}
+
+                <Box
+                    sx={{
+                        width: '100vw',
+                        maxWidth: { xs: "100%", xl: "100%" },
+                        background: "black",
+                        height: "50px",
+                        mt: "35px",
+                        mb: "-20px",
+                        ml: "17px"
+                    }}
+                ></Box>
+            </Grid>
+
         </>
     )
 }

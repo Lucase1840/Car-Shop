@@ -22,6 +22,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getAllCars } from "../../redux/actions.js"
 import CarCards from "../CarCards/CarCards.jsx"
+import { ReactComponent as Logo } from "../../publicImages/LogoEgo.svg"
 
 const drawerWidth = 240;
 
@@ -90,18 +91,21 @@ export default function Menu() {
     return (
         <Box sx={{ display: 'flex', width: { xs: "40%", xl: "85%" }, padding: 0, margin: 0 }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-                        Persistent drawer
-                    </Typography>
+
+            <AppBar position="fixed" open={open} sx={{ boxShadow: 1 }}>
+                <Toolbar sx={{ display: "flex", background: "#FFFFFF", boxShadow: 0, color: "black", justifyContent: "space-between" }}>
+                    <Logo />
+
+                    <Typography sx={{ p: 2, boxShadow: "0px 5px 0px 0px red", }}>Modelos</Typography>
+                    <Typography sx={{ p: 2, boxShadow: "0px 5px 0px 0px red", justifyContent: "flex-start" }}>Ficha del modelo</Typography>
+
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         edge="end"
                         onClick={handleDrawerOpen}
-                        sx={{ ...(open && { display: 'none' }) }}
-                    >
+                        sx={{ ...(open && { display: 'none' }), fontSize: { xs: "0", xl: "1rem" }, }}
+                    >Menú
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
@@ -181,6 +185,6 @@ export default function Menu() {
                 {/* <DrawerHeader /> */}
                 <CarCards />
             </Main>
-        </Box>
+        </Box >
     );
 }
