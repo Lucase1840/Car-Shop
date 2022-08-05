@@ -55,7 +55,7 @@ function Carousel({ carouselData }) {
                                     justifyContent: "space-around",
                                     alignItems: "left",
                                     maxWidth: { xs: "100%", xl: "330px" },
-                                    height: { xs: "300px", xl: "300px" },
+                                    maxHeight: { xs: "300px", xl: "300px" },
                                     padding: 2,
                                 }}>
                                     <Box
@@ -75,7 +75,7 @@ function Carousel({ carouselData }) {
                                         mt: 2
                                     }}>{detail.description}</Typography>
                                     <Typography sx={{
-                                        fontSize: { xs: "20px", xl: "24px" },
+                                        fontSize: { xs: "20px", xl: "20px" },
                                         mt: 1
                                     }}>{detail.name}</Typography>
                                 </Box>

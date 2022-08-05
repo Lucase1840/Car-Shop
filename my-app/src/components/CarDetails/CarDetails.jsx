@@ -7,6 +7,7 @@ import {
     makeStyles,
 } from "@material-ui/core/styles";
 import Carousel from "../Carousel/Carousel.jsx"
+import NavBar from "../NavBar/NavBar.jsx"
 
 export default function CarDetails() {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function CarDetails() {
     console.log(carDetails)
     return (
         <>
+            <NavBar />
             <Grid container spacing={{ xs: 1, sm: 1, md: 3, xl: 4 }} columns={{ xs: 1, sm: 1, md: 2, xl: 2 }} sx={{
                 display: 'flex',
                 backgroundColor: "white",
@@ -53,8 +55,8 @@ export default function CarDetails() {
                         ml: { xs: "15px", xl: "65px" },
                     }}>
                         <Typography variant="h5" sx={{ fontWeight: "bold", fontSize: { xl: "2rem" } }}>{carDetails.name}</Typography>
-                        <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: { xl: "4rem" }, width: { xl: "70%" } }}>{carDetails.title}</Typography>
-                        <Typography dangerouslySetInnerHTML={{ __html: carDetails.description }} sx={{ fontSize: { xs: "5vw", xl: "1.5rem" }, width: { xl: "70%" } }}></Typography>
+                        <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: { xl: "4rem" }, width: { xl: "70%" }, mr: { xs: 1 } }}>{carDetails.title}</Typography>
+                        <Typography dangerouslySetInnerHTML={{ __html: carDetails.description }} sx={{ fontSize: { xs: "5vw", xl: "1.5rem" }, width: { xl: "70%" }, mr: { xs: 1 } }}></Typography>
                     </Box>
                 </Grid>
 
@@ -106,13 +108,13 @@ export default function CarDetails() {
 
                 <Box
                     sx={{
-                        width: '100vw',
+                        minWidth: '100vw',
                         maxWidth: { xs: "100%", xl: "100%" },
                         background: "black",
                         height: "50px",
                         mt: "35px",
                         mb: "-20px",
-                        ml: "17px"
+                        ml: { xs: "8px", xl: "32px" }
                     }}
                 ></Box>
             </Grid>

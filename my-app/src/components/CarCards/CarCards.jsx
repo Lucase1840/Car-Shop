@@ -57,9 +57,8 @@ function CarCards() {
         <Box>
             <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 1 }} columns={{ xs: 1, sm: 2, md: 3, xl: 4 }} >
                 {carsToRender ? carsToRender.map((car) => (
-                    <Grid item xs={1} key={car.id} className={classes.root} sx={{ mt: { xs: "60px", xl: "150px" } }}>
+                    <Grid item xs={1} key={car.id} className={classes.root} sx={{ mt: { xs: "55px", xl: "30px" }, mb: { xl: "30px" } }}>
                         <Box sx={{
-                            backgroundColor: '#efefee',
                             // width: { xs: "360px", xl: "280px" },
                             height: "260px",
                             display: 'flex',
