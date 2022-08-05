@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Drawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,13 +24,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAllCars } from "../../redux/actions.js"
 import CarCards from "../CarCards/CarCards.jsx"
 import { ReactComponent as Logo } from "../../publicImages/LogoEgo.svg"
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { width } from '@mui/system';
+import Filters from "../Filters/Filters.jsx"
 
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
-        padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -83,28 +86,29 @@ export default function Menu() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
-    // useEffect(() => {
-
-    // }, [])
+    const screenWidth = useMediaQuery('(min-width:380px)')
 
     return (
-        <Box sx={{ display: 'flex', width: { xs: "40%", xl: "85%" }, padding: 0, margin: 0 }}>
+        // <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 1 }} columns={{ xs: 1, sm: 2, md: 3, xl: 4 }} sx={{ width: "100vw" }} >
+        <Box sx={{ display: 'flex', maxWidth: `calc(100% - ${drawerWidth}px)` }}>
             <CssBaseline />
 
-            <AppBar position="fixed" open={open} sx={{ boxShadow: 1 }}>
-                <Toolbar sx={{ display: "flex", background: "#FFFFFF", boxShadow: 0, color: "black", justifyContent: "space-between" }}>
-                    <Logo />
-
-                    <Typography sx={{ p: 2, boxShadow: "0px 5px 0px 0px red", }}>Modelos</Typography>
-                    <Typography sx={{ p: 2, boxShadow: "0px 5px 0px 0px red", justifyContent: "flex-start" }}>Ficha del modelo</Typography>
+            <AppBar position="fixed" open={open} sx={{ boxShadow: 1, }}>
+                <Toolbar sx={{ display: "flex", background: "#FFFFFF", boxShadow: 0, color: "black", justifyContent: "flex-start" }}>
+                    <Box sx={{ mr: "35px" }}>
+                        <Logo />
+                    </Box>
+                    <Box sx={{ display: "flex", minWidth: { xl: "350px" }, justifyContent: "space-around" }}>
+                        {screenWidth && <Typography sx={{ p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold" }}>Modelos</Typography>}
+                        {screenWidth && <Typography sx={{ p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold" }}>Ficha de modelo</Typography>}
+                    </Box>
 
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         edge="end"
                         onClick={handleDrawerOpen}
-                        sx={{ ...(open && { display: 'none' }), fontSize: { xs: "0", xl: "1rem" }, }}
+                        sx={{ ...(open && { display: 'none' }), fontSize: { xs: "0", xl: "1rem" }, ml: { xs: "240px", xl: "1370px" } }}
                     >Menú
                         <MenuIcon />
                     </IconButton>
@@ -115,7 +119,6 @@ export default function Menu() {
                     sx={{
                         width: drawerWidth,
                         flexShrink: 0,
-                        zIndex: 1200,
                         '& .MuiDrawer-paper': {
                             width: drawerWidth,
                         },
@@ -182,9 +185,23 @@ export default function Menu() {
                         ))}
                     </List>
                 </Drawer>
-                {/* <DrawerHeader /> */}
+                <Typography className="car-name" sx={{ mt: { xs: "75px", xl: "145px" }, fontSize: { xs: "2rem", xl: "3rem" }, ml: { xl: "80px", xs: "25px" } }}>Descubrí todos los modelos</Typography>
+                <Filters />
                 <CarCards />
+                <Box
+                    sx={{
+                        width: '100vw',
+                        maxWidth: { xs: "100%", xl: "100%" },
+                        background: "black",
+                        height: "50px",
+                        position: { xl: "absolute" },
+                        bottom: 0,
+                        mt: { xs: "60px" }
+                    }}
+                ></Box>
             </Main>
         </Box >
+        // </Grid >
+
     );
 }

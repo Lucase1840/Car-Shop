@@ -37,6 +37,8 @@ export const useStyles = makeStyles({
 function CarCards() {
     const dispatch = useDispatch();
     const cars = useSelector(state => state.allCars)
+    const filteredCarsByType = useSelector(state => state.filteredCarsByType)
+    const sortingFlag = useSelector(state => state.sortFlag)
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -44,35 +46,37 @@ function CarCards() {
         dispatch(getAllCars())
     }, [dispatch])
 
+    const carsToRender = filteredCarsByType.length ? filteredCarsByType : cars
+
+
     const hadleClick = (carId) => {
         navigate(`cardetails/${carId}`)
     }
-
     console.log(cars)
     return (
         <Box>
             <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 1 }} columns={{ xs: 1, sm: 2, md: 3, xl: 4 }} >
-                {cars ? cars.map((car) => (
-                    <Grid item xs={1} key={car.id} className={classes.root} >
+                {carsToRender ? carsToRender.map((car) => (
+                    <Grid item xs={1} key={car.id} className={classes.root} sx={{ mt: { xs: "60px", xl: "150px" } }}>
                         <Box sx={{
                             backgroundColor: '#efefee',
-                            width: { xs: "360px", xl: "280px" },
+                            // width: { xs: "360px", xl: "280px" },
                             height: "260px",
-                            marginTop: "60px",
-                            mx: "auto",
                             display: 'flex',
                             flexDirection: "column",
                             justifyContent: "center",
-                            alignItems: "center"
+                            alignItems: "center",
+                            margin: 0,
+                            // mt: { xs: "20px", xl: "140px" }
                         }}>
                             <Box sx={{
                                 display: 'flex',
                                 flexDirection: "column",
                                 justifyContent: "center",
-                                alignItems: "center"
+                                alignItems: "center",
                             }}>
                                 <Typography variant="h4" className="car-name">{car.name}</Typography>
-                                <Typography>{`${car.year} | ${car.price}`}</Typography>
+                                <Typography>{`${car.year} | ${car.argentinianPrice}`}</Typography>
                             </Box>
 
                             <Box sx={{
