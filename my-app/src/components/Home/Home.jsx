@@ -21,6 +21,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getAllCars } from "../../redux/actions.js"
+import CarCards from "../CarCards/CarCards.jsx"
 
 const drawerWidth = 240;
 
@@ -71,7 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function Menu() {
     const theme = useTheme();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -82,12 +83,12 @@ export default function Menu() {
         setOpen(false);
     };
 
-    useEffect(() => {
-        dispatch(getAllCars())
-    }, [])
+    // useEffect(() => {
+
+    // }, [])
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', width: { xs: "40%", xl: "85%" }, padding: 0, margin: 0 }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -106,103 +107,80 @@ export default function Menu() {
                 </Toolbar>
             </AppBar>
             <Main open={open}>
-                <DrawerHeader />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                    enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                    imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                    Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                    nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                    leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                    feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                    consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                    eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                    neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                    tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                    tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                    gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                    et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                    eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                    posuere sollicitudin aliquam ultrices sagittis orci a.
-                </Typography>
-            </Main>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
+                <Drawer
+                    sx={{
                         width: drawerWidth,
-                    },
-                }}
-                variant="persistent"
-                anchor="right"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List disablePadding={true}>
-                    {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List>
-                    {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider sx={{
-                    marginLeft: "32px",
-                    marginRight: "20px",
-                }} />
-                <List>
-                    {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <List sx={{
-                    backgroundColor: "#EFEEEF",
-                }}>
-                    {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
+                        flexShrink: 0,
+                        zIndex: 1200,
+                        '& .MuiDrawer-paper': {
+                            width: drawerWidth,
+                        },
+                    }}
+                    variant="persistent"
+                    anchor="right"
+                    open={open}
+                >
+                    <DrawerHeader sx={{
+                        width: { xs: "40%" }
+                    }}>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List disablePadding={true}>
+                        {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List>
+                        {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider sx={{
+                        marginLeft: "32px",
+                        marginRight: "20px",
+                    }} />
+                    <List>
+                        {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <List sx={{
+                        backgroundColor: "#EFEEEF",
+                    }}>
+                        {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemText primary={text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
+                {/* <DrawerHeader /> */}
+                <CarCards />
+            </Main>
         </Box>
     );
 }
