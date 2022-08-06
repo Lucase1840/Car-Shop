@@ -4,6 +4,8 @@ First clone the repository in your PC.
 
 Open a git-bash terminal in my-app folder, and type "npm install".
 
+If an error of dependency tree occurs, try the next command: "npm i --force"
+
 Finally, type "npm start" and wait for the browser to open the website.
 
 Hope you like it!
