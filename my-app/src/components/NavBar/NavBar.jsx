@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Drawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,22 +16,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { getAllCars } from "../../redux/actions.js"
-import CarCards from "../CarCards/CarCards.jsx"
-import { ReactComponent as Logo } from "../../publicImages/LogoEgo.svg"
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { width } from '@mui/system';
-import Filters from "../Filters/Filters.jsx"
-import { useLocation } from 'react-router-dom';
-import CarDetails from '../CarDetails/CarDetails.jsx';
-
-
+import { ReactComponent as Logo } from "../../publicImages/LogoEgo.svg"
 
 const drawerWidth = 240;
 
@@ -73,15 +61,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
 }));
 
 export default function NavBar() {
     const theme = useTheme();
-    // const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
+    const screenWidth = useMediaQuery('(min-width:380px)');
+    const location = useLocation();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -90,11 +79,10 @@ export default function NavBar() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const screenWidth = useMediaQuery('(min-width:380px)')
 
-    const location = useLocation();
-
-    console.log(location.pathname)
+    const handleClick = () => {
+        navigate("/")
+    };
 
     return (
         <Box sx={{ maxWidth: `calc(100% - ${drawerWidth}px)`, }}>
@@ -105,9 +93,15 @@ export default function NavBar() {
                         <Logo />
                     </Box>
                     <Box sx={{ display: "flex", minWidth: { xl: "350px" }, justifyContent: "space-around" }}>
-                        {screenWidth && <Typography sx={location.pathname === "/" ? { p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold" } : { p: 2, alignSelf: "flex-end", fontWeight: "bold" }}>Modelos</Typography>}
+                        {screenWidth && <Typography onClick={handleClick} sx={location.pathname === "/"
+                            ? { p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold", cursor: { xl: "pointer" } }
+                            : { p: 2, alignSelf: "flex-end", fontWeight: "bold", }}
+                        >Modelos</Typography>}
 
-                        {screenWidth && <Typography sx={location.pathname !== "/" ? { p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold" } : { p: 2, alignSelf: "flex-end", fontWeight: "bold" }}>Ficha de modelo</Typography>}
+                        {screenWidth && <Typography onClick={handleClick} sx={location.pathname !== "/"
+                            ? { p: 2, boxShadow: "0px 3px 0px 0px red", alignSelf: "flex-end", fontWeight: "bold" }
+                            : { p: 2, alignSelf: "flex-end", fontWeight: "bold" }}
+                        >Ficha de modelo</Typography>}
                     </Box>
                     <IconButton
                         color="inherit"
@@ -145,8 +139,8 @@ export default function NavBar() {
                         marginRight: "20px",
                     }} />
                     <List disablePadding={true}>
-                        {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
+                        {['Modelos', 'Servicios y Accesorios', 'Financiación', 'Reviews y Comunidad'].map((text, i) => (
+                            <ListItem key={i} disablePadding>
                                 <ListItemButton>
                                     <ListItemText primary={text} />
                                 </ListItemButton>
@@ -158,8 +152,8 @@ export default function NavBar() {
                         marginRight: "20px",
                     }} />
                     <List>
-                        {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
+                        {['Toyota Mobility Service', 'Toyota Gazoo Racing', 'Toyota Híbridos'].map((text, i) => (
+                            <ListItem key={i} disablePadding>
                                 <ListItemButton>
                                     <ListItemText primary={text} />
                                 </ListItemButton>
@@ -171,8 +165,8 @@ export default function NavBar() {
                         marginRight: "20px",
                     }} />
                     <List>
-                        {['Concesionarios', 'Test Drive', 'Contacto'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
+                        {['Concesionarios', 'Test Drive', 'Contacto'].map((text, i) => (
+                            <ListItem key={i} disablePadding>
                                 <ListItemButton>
                                     <ListItemText primary={text} />
                                 </ListItemButton>
@@ -181,9 +175,10 @@ export default function NavBar() {
                     </List>
                     <List sx={{
                         backgroundColor: "#EFEEEF",
+                        height: { xl: "100%" }
                     }}>
-                        {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
+                        {['Actividades', 'Servicios al Cliente', 'Ventas Especiales', 'Innovación', 'Prensa', 'Acerca de...'].map((text, i) => (
+                            <ListItem key={i} disablePadding>
                                 <ListItemButton>
                                     <ListItemText primary={text} />
                                 </ListItemButton>

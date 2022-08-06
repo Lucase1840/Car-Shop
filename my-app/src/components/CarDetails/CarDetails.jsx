@@ -1,11 +1,8 @@
-import { Box, Grid, Typography, ImageListItem, Button, Paper } from '@mui/material';
-import { useEffect, useRef, useState } from "react";
+import { Box, Grid, Typography } from '@mui/material';
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom';
 import { getCarDetails } from "../../redux/actions.js"
-import {
-    makeStyles,
-} from "@material-ui/core/styles";
 import Carousel from "../Carousel/Carousel.jsx"
 import NavBar from "../NavBar/NavBar.jsx"
 
@@ -18,8 +15,6 @@ export default function CarDetails() {
         dispatch(getCarDetails(carId))
     }, [carId, dispatch]);
 
-
-    console.log(carDetails)
     return (
         <>
             <NavBar />
@@ -41,7 +36,10 @@ export default function CarDetails() {
                         width: '100vw',
                         maxWidth: { xs: "100%", xl: 800 },
                         borderRadius: 3,
-                        p: 1
+                        p: 1,
+                        height: { xs: "250px", xl: "500px" },
+                        objectFit: "contain"
+
                     }}
                     src={carDetails.photo}
                     alt={carDetails.name}
@@ -53,10 +51,13 @@ export default function CarDetails() {
                         justifyContent: "center",
                         alignItems: "left",
                         ml: { xs: "15px", xl: "65px" },
+                        width: '100%',
                     }}>
                         <Typography variant="h5" sx={{ fontWeight: "bold", fontSize: { xl: "2rem" } }}>{carDetails.name}</Typography>
-                        <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: { xl: "4rem" }, width: { xl: "70%" }, mr: { xs: 1 } }}>{carDetails.title}</Typography>
-                        <Typography dangerouslySetInnerHTML={{ __html: carDetails.description }} sx={{ fontSize: { xs: "5vw", xl: "1.5rem" }, width: { xl: "70%" }, mr: { xs: 1 } }}></Typography>
+
+                        <Typography variant="h5" sx={{ fontWeight: "bold", fontSize: { xl: "3rem" }, width: { xl: "70%" }, mr: { xs: 1 }, pr: { xs: 1 } }}>{carDetails.title}</Typography>
+
+                        <Typography dangerouslySetInnerHTML={{ __html: carDetails.description }} sx={{ fontSize: { xs: "5vw", xl: "1.5rem" }, width: { xl: "70%" }, mr: { xs: 1 }, pr: { xs: 2 } }}></Typography>
                     </Box>
                 </Grid>
 
@@ -88,6 +89,7 @@ export default function CarDetails() {
                                 padding: 1,
                             }}>
                                 <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: "20px", mt: "10px" }}>{highlight.title}</Typography>
+
                                 <Typography dangerouslySetInnerHTML={{ __html: highlight.content }} sx={{ fontSize: { xs: "16px" } }}></Typography>
                             </Box>
                             <Box
@@ -114,7 +116,7 @@ export default function CarDetails() {
                         height: "50px",
                         mt: "35px",
                         mb: "-20px",
-                        ml: { xs: "8px", xl: "32px" }
+                        ml: { xs: "8px", xl: "15px" }
                     }}
                 ></Box>
             </Grid>

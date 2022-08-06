@@ -10,7 +10,6 @@ export function getAllCars() {
   return function (dispatch) {
     return axios(`${URL}`)
       .then(resp => {
-        console.log(resp.data)
         const carsWithLocalCurrency = resp.data.map(car => {
           const argentinianPrice = (car.price).toLocaleString('es-ar', {
             style: 'currency',
@@ -23,7 +22,6 @@ export function getAllCars() {
         resp.data.forEach(car => {
           if (!segmentOptions.includes(car.segment)) segmentOptions.push(car.segment)
         })
-
         dispatch({ type: GET_ALL_CARS, payload: { carsWithLocalCurrency, segmentOptions } })
       })
       .catch(error => console.log(error.message))

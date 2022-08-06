@@ -1,25 +1,21 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import { useDispatch, useSelector } from "react-redux"
 import { filterByCarType } from "../../redux/actions.js"
+import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 
 
-export default function FilterTabs() {
+
+export default function FilterTabs({ setorderBy }) {
     const dispatch = useDispatch();
-    const filterOptions = useSelector(state => state.carTypeOptions)
+    const filterOptions = useSelector(state => state.carTypeOptions);
     const [value, setValue] = React.useState(0);
 
     const onClick = (event) => {
         setValue(event.target.innerText);
+        setorderBy('');
         dispatch(filterByCarType(event.target.innerText))
     };
 
