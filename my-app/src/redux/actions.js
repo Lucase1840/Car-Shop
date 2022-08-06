@@ -8,7 +8,7 @@ export function getAllCars() {
     return axios(`${URL}`)
       .then(resp =>
       // dispatch({ type: GET_ALL_CARS, payload: resp.data }))
-      { console.log(resp) }
+      { console.log(resp.data) }
       )
       .catch(error => console.log(error.message))
   }
