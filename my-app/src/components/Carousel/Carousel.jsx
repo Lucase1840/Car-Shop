@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -15,7 +14,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 function Carousel({ carouselData }) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = carouselData ? carouselData.length : 0
+    const maxSteps = carouselData ? carouselData.length : 0;
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -31,62 +30,51 @@ function Carousel({ carouselData }) {
 
     return (
         <Box sx={{ maxWidth: "100%" }}>
-            {/* <Paper
-                square
-                elevation={0}
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    height: 50,
-                    pl: 2,
-                    bgcolor: '#F7F7F7',
-                }}
-            >
-            </Paper> */}
-
             <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
             >
-
                 {carouselData ? carouselData.map((detail, i) => {
                     return (<div key={i}>
                         {Math.abs(activeStep - i) <= 2 ? (
                             <Box sx={{
                                 display: 'flex',
                                 flexDirection: "row",
-                                height: 410,
+                                height: { xs: 420, xl: 390 },
                                 alignItems: "center",
                                 justifyContent: "space-around",
+                                background: "#F2F2F2",
+                                maxWidth: "100vw"
                             }}>
                                 <Box sx={{
                                     display: "flex",
                                     flexDirection: "column",
                                     justifyContent: "space-around",
                                     alignItems: "left",
-                                    maxWidth: 270,
-                                    height: "265px",
+                                    maxWidth: { xs: "100%", xl: "330px" },
+                                    maxHeight: { xs: "300px", xl: "300px" },
                                     padding: 2,
                                 }}>
                                     <Box
                                         component="img"
                                         sx={{
                                             display: 'block',
-                                            // overflow: 'hidden',
                                             width: '100%',
-                                            height: "380px"
+                                            height: { xs: "90%", xl: "200px" },
+                                            borderRadius: 3,
                                         }}
                                         src={detail.image}
                                         alt={detail.name}
                                     />
                                     <Typography sx={{
                                         fontWeight: "bold",
-                                        fontSize: { sx: "2vw", xl: "1vw" },
-                                        mt: 1
+                                        fontSize: { xs: "20px", xl: "27px" },
+                                        mt: 2
                                     }}>{detail.description}</Typography>
                                     <Typography sx={{
+                                        fontSize: { xs: "20px", xl: "20px" },
                                         mt: 1
                                     }}>{detail.name}</Typography>
                                 </Box>
@@ -97,11 +85,13 @@ function Carousel({ carouselData }) {
 
             </AutoPlaySwipeableViews>
             <MobileStepper
+                sx={{ background: "#F2F2F2", justifyContent: "space-evenly" }}
                 steps={maxSteps}
                 position="static"
                 activeStep={activeStep}
                 nextButton={
                     <Button
+                        sx={{ color: "black" }}
                         size="small"
                         onClick={handleNext}
                         disabled={activeStep === maxSteps - 1}
@@ -115,7 +105,7 @@ function Carousel({ carouselData }) {
                     </Button>
                 }
                 backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                    <Button size="small" onClick={handleBack} disabled={activeStep === 0} sx={{ color: "black" }}>
                         {theme.direction === 'rtl' ? (
                             <KeyboardArrowRight />
                         ) : (
